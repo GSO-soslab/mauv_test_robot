@@ -20,8 +20,25 @@ def generate_launch_description():
             name='mauv_1_mauv_2',
             arguments = ["0.0", "0.0", "0.0", "0.0", "0.0", "0.0", 'mauv_1/world', 'mauv_2/world'] 
             # arguments = ["30.0", "-30.0", "0.0", "0.0", "0.0", "0.0", 'mauv_1/world', 'mauv_2/world']
+        ),
 
-   
+
+        # connect the mauv_1 and mauv_3
+        Node(
+            package='tf2_ros',
+            executable='static_transform_publisher',
+            name='mauv_1_mauv_3',
+            arguments = ["0.0", "0.0", "0.0", "0.0", "0.0", "0.0", 'mauv_1/world', 'mauv_3/world'] 
+            # arguments = ["30.0", "-30.0", "0.0", "0.0", "0.0", "0.0", 'mauv_1/world', 'mauv_2/world']
+        ),
+
+        # connect the mauv_1 and mauv_4
+        Node(
+            package='tf2_ros',
+            executable='static_transform_publisher',
+            name='mauv_1_mauv_4',
+            arguments = ["0.0", "0.0", "0.0", "0.0", "0.0", "0.0", 'mauv_1/world', 'mauv_4/world'] 
+            # arguments = ["30.0", "-30.0", "0.0", "0.0", "0.0", "0.0", 'mauv_1/world', 'mauv_2/world']
         ),
 
         # connect world and world_ned for mauv1
@@ -39,6 +56,23 @@ def generate_launch_description():
             name='mauv_2_world_ned',
             arguments = ["0.0", "0.0", "0.0", "1.571", "0.0", "3.1415", 'mauv_2/world', 'mauv_2/world_ned']    
         ),        
+
+        # connect world and world_ned for mauv3
+        Node(
+            package='tf2_ros',
+            executable='static_transform_publisher',
+            name='mauv_3_world_ned',
+            arguments = ["0.0", "0.0", "0.0", "1.571", "0.0", "3.1415", 'mauv_3/world', 'mauv_3/world_ned']    
+        ),
+
+        # connect world and world_ned for mauv4
+        Node(
+            package='tf2_ros',
+            executable='static_transform_publisher',
+            name='mauv_4_world_ned',
+            arguments = ["0.0", "0.0", "0.0", "1.571", "0.0", "3.1415", 'mauv_4/world', 'mauv_4/world_ned']    
+        ),        
+
 
         # connect odom to world for mauv_1 to support RViz fixed frame
         # Node(

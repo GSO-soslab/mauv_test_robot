@@ -45,6 +45,27 @@ def generate_launch_description():
         # launch_arguments = {'arg_robot_name': arg_robot_name}.items()    
     )
 
+    # =================================================== #
+    # bringup everything related to ros setup for mavu 3
+    # =================================================== #
+    mauv_3 = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            os.path.join(get_package_share_directory(robot_bringup), 
+            'launch','include','bringup_mauv_3.launch.py')]),
+        # launch_arguments = {'arg_robot_name': arg_robot_name}.items()    
+    )   
+
+    # =================================================== #
+    # bringup everything related to ros setup for mauv 4
+    # =================================================== #
+
+    mauv_4 = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            os.path.join(get_package_share_directory(robot_bringup), 
+            'launch','include','bringup_mauv_4.launch.py')]),
+        # launch_arguments = {'arg_robot_name': arg_robot_name}.items()    
+    )
+
     vis = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(get_package_share_directory(robot_bringup), 
@@ -56,6 +77,8 @@ def generate_launch_description():
         simulation,
         mauv_1,
         mauv_2,
+        mauv_3,
+        mauv_4,
         vis,
     ])  
 

@@ -67,6 +67,31 @@ def generate_launch_description():
         }.items()    
     )  
 
+    # bringup the third mauv 
+    sim_mauv_3 = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            os.path.join(get_package_share_directory(robot_bringup),
+            'launch', 'include', 'mauv_3', 'mauv_3.launch.py')]),
+        launch_arguments = {
+            'arg_vehicle_name': 'mauv_3',
+            'arg_world_frame': 'mauv_3/world',
+            'arg_imu_frame': 'mauv_3/imu_sf'
+            
+        }.items()    
+    )   
+
+    # bringup the fourth mauv
+    sim_mauv_4 = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            os.path.join(get_package_share_directory(robot_bringup),
+            'launch', 'include', 'mauv_4', 'mauv_4.launch.py')]),
+        launch_arguments = {
+            'arg_vehicle_name': 'mauv_4',
+            'arg_world_frame': 'mauv_4/world',
+            'arg_imu_frame': 'mauv_4/imu_sf'
+        }.items()    
+    )  
+
     # ======================================================================= #
     # all the nodes
     # ======================================================================= #
@@ -74,6 +99,8 @@ def generate_launch_description():
         stonefish,
         sim_mauv_1,
         sim_mauv_2,
+        sim_mauv_3,
+        sim_mauv_4,
     ])
 
 

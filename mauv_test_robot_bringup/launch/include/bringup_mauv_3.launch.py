@@ -16,7 +16,7 @@ def generate_launch_description():
     arg_robot_name = 'mauv_test_robot'
     robot_bringup = arg_robot_name + '_bringup'
 
-    vehicle_name = 'mauv_1'
+    vehicle_name = 'mauv_3'
 
     # # simulation
     # simulation = IncludeLaunchDescription(

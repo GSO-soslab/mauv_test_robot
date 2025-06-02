@@ -28,7 +28,7 @@ bhv_direct_control:
   desired_z: 0.5
 
   # orientation (0.4 rad = 23 degree)
-  desired_roll: 0.0 
+  desired_roll: 0.1 
   desired_pitch: 0.0
   desired_yaw: 0.0
 

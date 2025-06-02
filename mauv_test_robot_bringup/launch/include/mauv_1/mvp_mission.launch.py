@@ -66,3 +66,37 @@ def generate_launch_description():
             ])
         
 ])
+
+    # return LaunchDescription([
+    #     TimerAction(
+    #         period=0.0,
+    #         actions=[
+    #             Node(
+    #                 package="mvp_helm",
+    #                 executable="mvp_helm",
+    #                 namespace=vehicle_name,
+    #                 name="mvp_helm",
+    #                 prefix=['stdbuf -o L'],
+    #                 output="screen",
+    #                 remappings=[
+    #                     ('datum', 'gps/datum'),
+    #                 ],
+    #                 parameters=[
+    #                     {'helm_config_file': mvp_helm_config_file},
+    #                     {'tf_prefix': vehicle_name },
+    #                     mvp_mission_param_file,
+    #                     bhv_prefixed_params
+    #                 ]
+    #             ),
+
+    #             # The custom trajectory node
+    #             Node(
+    #                 package='mauv_test_robot_bringup',   
+    #                 executable='trajectory_mission',     
+    #                 name='trajectory_mission_node',
+    #                 namespace=vehicle_name,
+    #                 output='screen'
+    #             )
+    #         ]
+    #     )
+    # ])

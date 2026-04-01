@@ -84,7 +84,7 @@ def generate_launch_description():
 
 
     # =================================================== #
-    # old version one mauv
+    # old version one 
     # =================================================== #
 
     # # simulation

@@ -9,7 +9,6 @@
             </geometry>
         </visual>
     </link>
-
     
     <link name="base_link"/>
     <joint name="base_link" type="fixed">
@@ -24,7 +23,6 @@
         <parent link="base_link"/>
         <child link="cg_link"/>
     </joint>
-
 
     <link name="imu"/>
     <joint name="imu_joint" type="fixed">
@@ -110,7 +108,6 @@
         <parent link="base_link"/>
         <child link="sway_bow_thruster_link"/>
     </joint>
-    
 
     <link name="mbes_link_sf"/>
     <joint name="mbes_link_joint_sf" type="fixed">

@@ -12,7 +12,7 @@
     publish_acceleration: false
     publish_tf: true
     #frames
-    map_frame: mauv_1/map             # Defaults to "map" if unspecified
+    map_frame: mauv_1/map              # Defaults to "map" if unspecified
     odom_frame: mauv_1/odom            # Defaults to "odom" if unspecified
     base_link_frame: mauv_1/base_link  # Defaults to "base_link" if unspecified
     world_frame: mauv_1/odom           # Defaults to the value of odom_frame if unspecified

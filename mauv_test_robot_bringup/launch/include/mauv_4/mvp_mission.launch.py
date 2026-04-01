@@ -19,11 +19,15 @@ def generate_launch_description():
         get_package_share_directory('mauv_test_robot_bringup'),
         'config'
         )
-    mvp_mission_param_file = os.path.join(mvp_mission_path, 'mvp_mission.yaml') 
+    print("Mission path is:", mvp_mission_path)
+
+
+
+    mvp_mission_param_file = os.path.join(mvp_mission_path, vehicle_name, 'mvp_mission.yaml') #
     ###################################
     ####### behaviors param############
     ###################################
-    bhv_param_file = os.path.join(mvp_mission_path, 'bhv_params.yaml') 
+    bhv_param_file = os.path.join(mvp_mission_path, vehicle_name, 'bhv_params.yaml') 
     with open(bhv_param_file, 'r') as f:
         bhv_params = yaml.safe_load(f)
     # # Add prefix to parameter names
@@ -33,14 +37,18 @@ def generate_launch_description():
         bhv_prefix = bhv_name + '/'  # Use section name as prefix
         bhv_prefixed_params.update({bhv_prefix + key: value for key, value in bhv_params.items()})
     ######################################################################
-
+    
     # helm param 
     mvp_helm_path = os.path.join(
         get_package_share_directory('mauv_test_robot_config'),
         'mvp_mission_config',
         vehicle_name
         )
+    
+    print("helm path is:", mvp_helm_path)
+
     mvp_helm_config_file = os.path.join(mvp_helm_path, 'helm.yaml') 
+    print("Full helm.yaml path:", mvp_helm_config_file)
 
     # launch the node
     return LaunchDescription([
@@ -59,7 +67,7 @@ def generate_launch_description():
                         ],
                         parameters=[
                             {'helm_config_file': mvp_helm_config_file},
-                            {'tf_prefix': vehicle_name},
+                            {'tf_prefix': vehicle_name },
                             mvp_mission_param_file,
                             bhv_prefixed_params
                         ]

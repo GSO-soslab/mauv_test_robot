@@ -78,7 +78,7 @@ def generate_launch_description():
         mauv_1,
         mauv_2,
         mauv_3,
-        mauv_4,
+        # mauv_4,
         vis,
     ])  
 

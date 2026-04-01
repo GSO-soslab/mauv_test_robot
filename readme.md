@@ -149,3 +149,29 @@ ros2 launch mauv_test_robot_bringup bringup_simulation_mauv.launch.py
 - More information will be available after our MVP2 mission migration.
 test
 
+## MAUV
+ros2 launch mauv_test_robot_bringup bringup_simulation_mauv.launch.py
+
+ros2 launch simple_controller_pkg swarm_control.launch.py
+
+ros2 run simple_controller_pkg yaw_extractor_node \
+  --ros-args \
+  -p world_odom_topic:=/mauv_1/world_odom \
+  -p wp_odom_topic:=/mauv_1/waypoint_odom
+
+
+- Foxglove
+```
+ros2 launch foxglove_bridge foxglove_bridge_launch.xml 
+
+foxglove-studio
+
+
+- bag recording
+
+ros2 bag record -a -o /home/soslab-p330/ros2_ws/my_run_bag
+```
+<!-- ros2 bag record -o run_weights \ /rbf_weights \ /rbf_weight_norms \ /world_odom \ /waypoint_odom \ /z1_odom
+
+ros2 bag record -o /home/soslab-p330/ros2_ws/my_run_bag /rbf_weights /rbf_weight_norms -->
+

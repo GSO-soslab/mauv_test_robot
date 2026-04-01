@@ -22,7 +22,7 @@ def generate_launch_description():
     ###################################
     ####### behaviors param############
     ###################################
-    bhv_param_file = os.path.join(mvp_mission_path, 'bhv_params.yaml') 
+    bhv_param_file = os.path.join(mvp_mission_path, vehicle_name, 'bhv_params.yaml') 
     with open(bhv_param_file, 'r') as f:
         bhv_params = yaml.safe_load(f)
     # # Add prefix to parameter names

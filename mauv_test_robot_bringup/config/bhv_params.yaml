@@ -11,11 +11,10 @@ bhv_teleop:
   ##LT resets desired states to zero for all.
   tele_s_surge: 2.0
   tele_s_sway: 1.0
-  tele_d_yaw: 10.0 
-  tele_d_pitch: 10.0
-  tele_d_depth: 0.5
+  tele_d_yaw: 0.0   #10.0 
+  tele_d_pitch: 0.0 # 10.0
+  tele_d_depth: 0.0 # 0.5
   no_joy_timeout: 500.0
-
 
 bhv_direct_control:
   ########################################
@@ -26,20 +25,20 @@ bhv_direct_control:
   # position
   desired_x: 0.0
   desired_y: 0.0
-  desired_z: 0.5
+  desired_z: 0.0 #0.5
 
   # orientation (0.4 rad = 23 degree)
-  desired_roll: 0.0 
+  desired_roll: 0.0 #0.1 
   desired_pitch: 0.0
-  desired_yaw: 0.0
+  desired_yaw: 0.1
 
   # velocity
-  desired_u: 0.0
+  desired_u: 10
   desired_v: 0.0
   desired_w: 0.0
 
   # angular velocity
-  desired_p: 0.0
+  desired_p: 10.0 #0.0
   desired_q: 0.0
   desired_r: 0.0
 
@@ -58,36 +57,42 @@ bhv_path_following:
 
   state_done: start
   state_fail: start
-  acceptance_radius: 3.0
-  lookahead_distance: 5.0
+  acceptance_radius: 1.0
+  lookahead_distance: 1.0
   overshoot_timeout: 30.0
-  surge_velocity: 0.8
+  surge_velocity: 0.4
   
   sigma: 0.01 #integral gain
-  beta_gain: 2.5 #sideslip compensation gain
+  beta_gain: 0.0 #sideslip compensation gain
 
   pitch_gain: 0.0
   pitch_assist_band: 0.5
   max_pitch: 0.35
 
-  lookahead_adaptive_flag: true
+  lookahead_adaptive_flag: false
   lookahead_max: 15.0
   lookahead_min: 3.0
   lookahead_gamma: 0.5
+
   turning_surge_velocity: 0.1
-  turning_angle_sector: 0.7
+  turning_angle_sector: 0.1
 
   # waypoint_x: [30.0, 0.0]
   # waypoint_y: [0.0, 20.0]
   # waypoint_z: [4.0, 5.0]
 
-  waypoint_x: [-5.0, 0.0, 5.0, -5.0, -5.0]
-  waypoint_y: [-2.0, 8.0, -2.0, -2.0, -2.0]
+
+  waypoint_x: [0.0, 50.0, 100.0, 0.0, 0.0]
+  waypoint_y: [0.0, 100.0, 0.0, 0.0, 0.0]
   waypoint_z: [0.0, 0.0,  0.0, 0.0, 0.0]
 
 
+  waypoint_x: [0.0, 0.0, -50.0, -50.0, 0.0]
+  waypoint_y: [0.0, 50.0, 50.0, 0.0, 0.0]
+  waypoint_z: [0.0, 0.0,  0.0, 0.0, 0.0]
+
   # waypoint_file_package: mauv_test_robot_bringup
-  # waypoint_path: config/mauv_3/go_to_list/
+  # waypoint_path: config/mauv_1/go_to_list/
 
 # bhv_altitude_tracking:
 #   desired_altitude: 10.0 #distance from the bottom always positive

@@ -13,17 +13,16 @@ def generate_launch_description():
     robot_name = 'mauv_test_robot'
     vehicle_name = 'mauv_2'
 
-
     # mvp_mission param
     mvp_mission_path = os.path.join(
         get_package_share_directory('mauv_test_robot_bringup'),
         'config'
         )
-    mvp_mission_param_file = os.path.join(mvp_mission_path, 'mvp_mission.yaml') 
+    mvp_mission_param_file = os.path.join(mvp_mission_path, vehicle_name, 'mvp_mission.yaml') 
     ###################################
     ####### behaviors param############
     ###################################
-    bhv_param_file = os.path.join(mvp_mission_path, 'bhv_params.yaml') 
+    bhv_param_file = os.path.join(mvp_mission_path, vehicle_name, 'bhv_params.yaml') 
     with open(bhv_param_file, 'r') as f:
         bhv_params = yaml.safe_load(f)
     # # Add prefix to parameter names

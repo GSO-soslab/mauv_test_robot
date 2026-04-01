@@ -22,7 +22,6 @@ def generate_launch_description():
             # arguments = ["30.0", "-30.0", "0.0", "0.0", "0.0", "0.0", 'mauv_1/world', 'mauv_2/world']
         ),
 
-
         # connect the mauv_1 and mauv_3
         Node(
             package='tf2_ros',
@@ -82,13 +81,13 @@ def generate_launch_description():
         #     arguments=["0.0", "0.0", "0.0", "0.0", "0.0", "0.0", 'mauv_1/odom', 'mauv_1/world']
         # ),
 
-        # rviz
-        Node(
-            package='rviz2',
-            executable='rviz2',
-            name='rviz2', 
-            arguments=['-d', [rviz_config_dir]],
-        ),
+        # # rviz
+        # Node(
+        #     package='rviz2',
+        #     executable='rviz2',
+        #     name='rviz2', 
+        #     arguments=['-d', [rviz_config_dir]],
+        # ),
 
         # # rqt
         # Node(package="rqt_gui", 

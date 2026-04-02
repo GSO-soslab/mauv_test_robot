@@ -1,177 +1,206 @@
-# MVP2 Test Robot
-## Introduction
-This is a mockup AUV for ROS2-MVP framework development.
-- Tested environment
-    - ROS version: Jazzy
-    - Ubuntu: 24.04
-- Directory information
-    - `mvp2_test_robot_bringup` 
-        - `launch` includes launch files
-            - `bringup_simulation.launch.py` is the main launch file to bring up the simulation environment
-            - `include` folder include all files called in the main bringup simulation file.
-        - `config` includes all ros params *.yaml files which are called in the sub launch file in the `include` folder.
-    - `mvp2_test_robot_config` include MVP configuration files. The files are in yaml format and was loaded in mvp code using yaml-cpp.
+# MAUV Test Robot
 
-    - `mvp2_test_robot_description` include urdf files and rviz configuration files.
+## Overview
+This repository provides a mockup MAUV robot for ROS 2 MVP (Marine Vehicle Package) framework development and simulation, where MAUV refers to Multi Autonomous Underwater Vehicle. It includes the robot package, bringup files, configuration files, and robot description required to run the MAUV platform in the Stonefish simulation environment.
 
-    ## Simulation Related Installation
-    ### Stonefish Simulator
-    We use [Stonefish](https://github.com/patrykcieslak/stonefish) Simulator for our system development.
-    Our configuration is tested with our forked Stonefish, which may sometimes lack behind the original repository. We will make sure we are up-to-date with the [original repository](https://github.com/patrykcieslak/stonefish).
-    #### Installatin
-    - Download the stonefish repository
-            ```
-            git clone https://github.com/patrykcieslak/stonefish.git
-            ```
-    - Download dependencies using `sudo apt install`
-        - libglm-dev
-        - libsdl2-dev
-        - libfreetype6-dev
-    - Fix a file in SDL2 library
-        - `cd /usr/lib/x86_64-linux-gnu/cmake/SDL2/`
-        - `sudo nano sdl2-config.cmake`
-        - Remove space after "-lSDL2".
-        - Save the file.
-    - Build the stonefish
-        - `cd stonefish`
-        - `mkdir build`
-        - `cd build`
-        - `cmake ..`
-        - `make -jx`(where x is the number of threads)
-        - `sudo make install`
-    - For more information about stonefish please check the original [repository](https://github.com/patrykcieslak/stonefish) and the [documentation](https://stonefish.readthedocs.io/en/latest/).
-  
-    - you may need pcl library
-        ```
-        sudo apt install libpcl-dev
-        ```
-    - you may encounter build error in regarding `Sample.h` file. If so add `#include <cstdint>` in `/stonefish/Library/include/sensors/Sample.h` will solve the problem.
+Unlike the previous single-vehicle package, this repository supports a multi-agent setup, where multiple underwater vehicles are simulated together and controlled through a cooperative multi-agent control framework.
 
+## Tested Environment
+- ROS 2: Jazzy
+- Ubuntu: 24.04
 
-### Stonefish ROS2 wrapper
-Our code is tested with the forked Stonefish ROS2 wrapper. We will make sure we are up-to-date with the original Stonefish ROS2 wrapper.
-The original wrapper can be found [here](https://github.com/patrykcieslak/stonefish_ros2)
-- Download the forked ROS2 wrapper 
-    ```
-    git clone https://github.com/patrykcieslak/stonefish_ros2.git
-    ```
+## Repository Structure
+- `mauv_test_robot`  
+  Core robot package files.
 
-### World of stonefish
-All the simulator files related to stonefish simulator are included in the `world_of_stonefish` repository. Sepcfically, the repository has stonefish scenario files and drivers that connects stonefish sensor messages into MVP compatible messages.
+- `mauv_test_robot_bringup`  
+  Bringup package for launching the MAUV in simulation.
+  - `launch`
+    - `bringup_simulation.launch.py`: launches the simulation environment
+    - `bringup_simulation_mauv.launch.py`: launches the MAUV-specific simulation setup
+  - `config`
+    - ROS parameter files in `.yaml` format
 
-- Download the repository
+- `mauv_test_robot_config`  
+  MVP-related configuration files.
+  - `mvp_control_config`
+    - Control-layer configuration files
+  - `mvp_mission_config`
+    - Mission-layer configuration files
 
-    ```
-    git clone https://github.com/GSO-soslab/world_of_stonefish.git
-    cd world_of_stonefish
-    git checkout jazzy-devel
-    ```
-- Directory information
-    - `data` has all the parts for the simualtor
-    - `metadata` contains all stonefish settinsg for looks and materials.
-    - `vehicles` contains all stonefish scenario files for vehicles.
-    - `world` contains the world scenario files which will call the files in `metadata` and `vehciles`.
-    - `include` and `src` have source files for stonefish sensor drivers.
+- `mauv_test_robot_description`  
+  Robot description files.
+  - `urdf`
+    - Robot URDF files
+  - `mesh`
+    - Mesh files used by the robot model
+  - `config`
+    - Additional description-related configuration files
 
-- The usbl driver will need a customized acomm msgs which is available here
-    ```
-    https://github.com/GSO-soslab/acomms_msgs.git
-    ```
+## Simulation Setup
 
-## MVP Framework in ROS2
-MVP frame work is our Guidance Navigation and Control framework.
+### Stonefish Simulator
+We use the Stonefish simulator for underwater robot simulation and development.
 
-### Robot localization
-The localization part uses the `robot_localization` package that is available [here](https://github.com/cra-ros-pkg/robot_localization.git)
-- Installation
-    ```
-    sudo apt install ros-jazzy-robot-localization
-    ```
-
-### MVP utilies
-This package contains utilites scripts for localization and topic conversions.
-- installation
-    ```
-    git clone https://github.com/uri-ocean-robotics/mvp_utilities.git
-    cd mvp_utilities
-    git checkout jazzy-devel
-    ```
-
-### MVP control
-MVP control is the low-level controller we developed. It accepts desired pose and outputs thruster commands to control the vehice pose in a specific frame.
-- Installation
-    ```
-    git clone https://github.com/uri-ocean-robotics/mvp_control.git
-    cd mvp_control
-    git checkout jazzy-devel
-    ```      
-
-- Install gsl library
-    ```
-    sudo apt-get install libgsl-dev
-    ```
-
-### MVP Message
-Our MVP frame uses the MVP messages which has customized ROS message and services for the MVP framework.
-- Installation
-
-    ```
-    git clone https://github.com/uri-ocean-robotics/mvp_msgs.git
-    cd mvp_msgs
-    git checkout jazzy-devel
-    ```
-
-### MVP mission
-This is the high level guidance system.
-We are currently migrating our ROS1 mvp_mission into ROS2 version.
-- Installation
-    ```
-    git clone https://github.com/uri-ocean-robotics/mvp_mission.git
-    cd mvp_mission
-    git checkout jazzy-devel
-    ```
-
-## Building the workspace
-After all the software are downloaded or installed from the previous section you can compile your ROS2 workspace.
-- `cd ~/ros2_ws`
-- `colcon build`
-
-## Testing the robot with Stonefish
-- Launch the simulator
+#### Installation
+Clone the Stonefish repository:
+```bash
+git clone https://github.com/patrykcieslak/stonefish.git
 ```
-ros2 launch mvp2_test_robot_bringup bringup_simulation.launch.py
 
+Install required dependencies:
+```bash
+sudo apt install libglm-dev libsdl2-dev libfreetype6-dev
+```
+
+You may also need:
+```bash
+sudo apt install libpcl-dev
+```
+
+Build Stonefish:
+```bash
+cd stonefish
+mkdir build
+cd build
+cmake ..
+make -j$(nproc)
+sudo make install
+```
+
+If you encounter a build error related to `Sample.h`, add:
+```cpp
+#include <cstdint>
+```
+
+to:
+```bash
+/stonefish/Library/include/sensors/Sample.h
+```
+
+### Stonefish ROS 2 Wrapper
+Install the ROS 2 wrapper for Stonefish:
+```bash
+git clone https://github.com/patrykcieslak/stonefish_ros2.git
+```
+
+### World of Stonefish
+All simulator files related to the Stonefish environment are included in the `world_of_stonefish` repository. This repository contains Stonefish scenario files and drivers that connect Stonefish sensor messages to MVP-compatible messages.
+
+Clone it with:
+```bash
+git clone https://github.com/GSO-soslab/world_of_stonefish.git
+cd world_of_stonefish
+git checkout jazzy-devel
+```
+
+Typical directory structure:
+- `data`: simulator assets
+- `metadata`: material and visual settings
+- `vehicles`: vehicle scenario files
+- `world`: world scenario files
+- `include` and `src`: source files for Stonefish sensor drivers
+
+If needed, the USBL driver uses a customized `acomms_msgs` package:
+```bash
+https://github.com/GSO-soslab/acomms_msgs.git
+```
+
+## MVP Framework in ROS 2
+The MVP framework is used as the guidance, navigation, and control framework for the marine vehicle platform.
+
+### Robot Localization
+The localization pipeline uses:
+```bash
+sudo apt install ros-jazzy-robot-localization
+```
+
+### MVP Utilities
+```bash
+git clone https://github.com/uri-ocean-robotics/mvp_utilities.git
+cd mvp_utilities
+git checkout jazzy-devel
+```
+
+### MVP Control
+```bash
+git clone https://github.com/uri-ocean-robotics/mvp_control.git
+cd mvp_control
+git checkout jazzy-devel
+```
+
+Install GSL if needed:
+```bash
+sudo apt-get install libgsl-dev
+```
+
+### MVP Messages
+```bash
+git clone https://github.com/uri-ocean-robotics/mvp_msgs.git
+cd mvp_msgs
+git checkout jazzy-devel
+```
+
+### MVP Mission
+```bash
+git clone https://github.com/uri-ocean-robotics/mvp_mission.git
+cd mvp_mission
+git checkout jazzy-devel
+```
+
+## Build
+After installing the required packages, build the ROS 2 workspace:
+```bash
+cd ~/ros2_ws
+colcon build
+source install/setup.bash
+```
+
+## Run the MAUV Simulation
+Launch the simulation:
+```bash
 ros2 launch mauv_test_robot_bringup bringup_simulation.launch.py
-
-ros2 launch mauv_test_robot_bringup bringup_simulation_mauv.launch.py
-
 ```
-- More information will be available after our MVP2 mission migration.
-test
 
-## MAUV
+or:
+```bash
 ros2 launch mauv_test_robot_bringup bringup_simulation_mauv.launch.py
+```
 
+## Multi-Agent Control Integration
+This repository is used together with `simple_controller_pkg`, which provides the cooperative controller for the multi-agent MAUV system. While `mauv_test_robot` defines the robot, simulation, and bringup environment, the control logic for coordinating multiple agents is implemented in `simple_controller_pkg`.
+
+Launch the multi-agent controller:
+```bash
 ros2 launch simple_controller_pkg swarm_control.launch.py
 
+For yaw extraction:
+```bash
 ros2 run simple_controller_pkg yaw_extractor_node \
   --ros-args \
   -p world_odom_topic:=/mauv_1/world_odom \
   -p wp_odom_topic:=/mauv_1/waypoint_odom
-
-
-- Foxglove
 ```
-ros2 launch foxglove_bridge foxglove_bridge_launch.xml 
 
+## Visualization and Logging
+
+### Foxglove
+```bash
+ros2 launch foxglove_bridge foxglove_bridge_launch.xml
+```
+
+Then open:
+```bash
 foxglove-studio
+```
 
-
-- bag recording
-
+### Bag Recording
+To record all topics:
+```bash
 ros2 bag record -a -o /home/soslab-p330/ros2_ws/my_run_bag
 ```
-<!-- ros2 bag record -o run_weights \ /rbf_weights \ /rbf_weight_norms \ /world_odom \ /waypoint_odom \ /z1_odom
 
-ros2 bag record -o /home/soslab-p330/ros2_ws/my_run_bag /rbf_weights /rbf_weight_norms -->
-
+## Notes
+- This repository is intended for MAUV simulation and MVP framework integration in ROS 2.
+- Some components depend on external repositories and packages, including the Stonefish ROS 2 wrapper (`stonefish_ros2`), `world_of_stonefish`, `mvp_control`, `mvp_msgs`, `mvp_utilities`, and `mvp_mission`.
+- Topic names, namespaces, and launch configurations may need to be adjusted depending on the specific experiment setup.

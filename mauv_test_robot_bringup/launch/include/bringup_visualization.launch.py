@@ -19,7 +19,6 @@ def generate_launch_description():
             executable='static_transform_publisher',
             name='mauv_1_mauv_2',
             arguments = ["0.0", "0.0", "0.0", "0.0", "0.0", "0.0", 'mauv_1/world', 'mauv_2/world'] 
-            # arguments = ["30.0", "-30.0", "0.0", "0.0", "0.0", "0.0", 'mauv_1/world', 'mauv_2/world']
         ),
 
         # connect the mauv_1 and mauv_3
@@ -28,7 +27,6 @@ def generate_launch_description():
             executable='static_transform_publisher',
             name='mauv_1_mauv_3',
             arguments = ["0.0", "0.0", "0.0", "0.0", "0.0", "0.0", 'mauv_1/world', 'mauv_3/world'] 
-            # arguments = ["30.0", "-30.0", "0.0", "0.0", "0.0", "0.0", 'mauv_1/world', 'mauv_2/world']
         ),
 
         # connect the mauv_1 and mauv_4
@@ -37,7 +35,6 @@ def generate_launch_description():
             executable='static_transform_publisher',
             name='mauv_1_mauv_4',
             arguments = ["0.0", "0.0", "0.0", "0.0", "0.0", "0.0", 'mauv_1/world', 'mauv_4/world'] 
-            # arguments = ["30.0", "-30.0", "0.0", "0.0", "0.0", "0.0", 'mauv_1/world', 'mauv_2/world']
         ),
 
         # connect world and world_ned for mauv1

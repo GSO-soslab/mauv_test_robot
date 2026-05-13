@@ -21,7 +21,6 @@ def generate_launch_description():
         PythonLaunchDescriptionSource([
             os.path.join(get_package_share_directory(robot_bringup), 
             'launch','include','bringup_stonefish.launch.py')]),
-        # launch_arguments = {'arg_robot_name': arg_robot_name}.items()    
     )  
 
     # =================================================== #
@@ -31,7 +30,6 @@ def generate_launch_description():
         PythonLaunchDescriptionSource([
             os.path.join(get_package_share_directory(robot_bringup), 
             'launch','include','bringup_mauv_1.launch.py')]),
-        # launch_arguments = {'arg_robot_name': arg_robot_name}.items()    
     )   
 
     # =================================================== #
@@ -42,7 +40,6 @@ def generate_launch_description():
         PythonLaunchDescriptionSource([
             os.path.join(get_package_share_directory(robot_bringup), 
             'launch','include','bringup_mauv_2.launch.py')]),
-        # launch_arguments = {'arg_robot_name': arg_robot_name}.items()    
     )
 
     # =================================================== #
@@ -52,7 +49,6 @@ def generate_launch_description():
         PythonLaunchDescriptionSource([
             os.path.join(get_package_share_directory(robot_bringup), 
             'launch','include','bringup_mauv_3.launch.py')]),
-        # launch_arguments = {'arg_robot_name': arg_robot_name}.items()    
     )   
 
     # =================================================== #
@@ -63,14 +59,12 @@ def generate_launch_description():
         PythonLaunchDescriptionSource([
             os.path.join(get_package_share_directory(robot_bringup), 
             'launch','include','bringup_mauv_4.launch.py')]),
-        # launch_arguments = {'arg_robot_name': arg_robot_name}.items()    
     )
 
     vis = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(get_package_share_directory(robot_bringup), 
             'launch','include','bringup_visualization.launch.py')]),
-        # launch_arguments = {'arg_robot_name': arg_robot_name}.items()    
     )    
 
     return LaunchDescription([

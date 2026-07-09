@@ -39,7 +39,7 @@ def generate_launch_description():
             package='robot_state_publisher',
             executable='robot_state_publisher',
             name='robot_state_publisher',
-            namespace=vehicle_name,
+            namespace=vehicle_name, #what is this line for?
             # output='screen',
             parameters=[{'robot_description' : robot_desc},
                         {'frame_prefix': vehicle_name +'/'}],

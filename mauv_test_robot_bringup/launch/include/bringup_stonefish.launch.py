@@ -100,7 +100,7 @@ def generate_launch_description():
         sim_mauv_1,
         sim_mauv_2,
         sim_mauv_3,
-        sim_mauv_4,
+        # sim_mauv_4,
     ])
 
 

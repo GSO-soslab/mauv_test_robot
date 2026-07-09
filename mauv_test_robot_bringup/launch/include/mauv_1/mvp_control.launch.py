@@ -6,7 +6,6 @@ from launch_ros.actions import Node
 from launch.substitutions import LaunchConfiguration
 from launch.actions import TimerAction
 
-
 def generate_launch_description():
     robot_name = 'mauv_test_robot'
     robot_bringup = robot_name + '_bringup'
@@ -23,11 +22,10 @@ def generate_launch_description():
         get_package_share_directory(robot_config),
         'mvp_control_config',
         vehicle_name
-    )
+        )
 
     mvp_control_param_file = os.path.join(robot_param_path, 'mvp_control.yaml') 
     mvp_control_config_file = os.path.join(robot_config_path,'config.yaml') 
-
 
     return LaunchDescription([
 
